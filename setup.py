@@ -21,10 +21,9 @@ except ImportError:
 
 import sys
 
-import loggly
 
 setup(name = 'loggly',
-      version = loggly.__version__,
+      version = '0.1.2',
       description = 'Loggly Library',
       long_description='Python interface to Loggly.',
       author = 'Mike Babineau',
