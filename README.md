@@ -24,7 +24,7 @@ Install using the provided `setup.py`:
 
 Or install from PyPI:
 
-    sudo easy_install loggly
+    sudo easy_install alertlogic
 
 
 Library Usage
