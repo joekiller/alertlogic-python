@@ -22,12 +22,13 @@ except ImportError:
 
 
 setup(name = 'alertlogic',
-    version = '0.1',
+    version = '0.1.1',
     description = 'Alert Logic Library',
     long_description='Python interface to Alert Logic.',
     author = 'Joseph Lawson',
     author_email = 'joe@joekiller.com',
     install_requires = ['simplejson'],
+    setup_requires = ['simplejson'],
     url = 'https://github.com/joekiller/alertlogic-python',
     packages = ['alertlogic'],
     license = 'Apache v2.0',
