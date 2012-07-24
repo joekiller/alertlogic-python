@@ -57,5 +57,5 @@ Notice
 --------------------
 Copyright 2012 Joseph Lawson
 
-This produce includes software developed at
+This product includes software developed at
 Electronic Arts Inc. (https://github.com/EA2D/loggly-python)
