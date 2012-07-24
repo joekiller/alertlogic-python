@@ -1,24 +1,18 @@
-loggly-python
+alertlogic-python
 =====================
-Python library and scripts for managing [Loggly](http://www.loggly.com) inputs and devices
 
-Currently, the library supports:
+Python interface for Alert Logic Threat Manager for EC2
 
-* Creating inputs
-* Deleting inputs
-* Listing inputs
-* Getting one or more inputs
-* Adding devices to inputs
-* Listing devices
-* Deleting devices
-* Getting one or more devices
+Check out [Alert Logic's AWS offerings](https://aws.amazon.com/solution-providers/isv/alert-logic)
 
-Love writing code?  [EA2D](http://ea2d.com) is [hiring](http://ea2d.com/jobs/)!
+
+
+This software is heavily based on EA2D's [Loggly-Python](https://github.com/EA2D/loggly-python) platform written by Mike Babineau.
 
 
 Requirements
 --------------------
-- Loggly account
+- Alert Logic Cloud account
 - simplejson Python module
 
 
@@ -35,49 +29,17 @@ Or install from PyPI:
 
 Library Usage
 --------------------
-See example [scripts](http://github.com/EA2D/loggly-python/tree/master/scripts), included in `scripts/`
-
-
-Script Usage
---------------------
-Set up your credentials:
-
-    export LOGGLY_USERNAME='someuser'
-    export LOGGLY_PASSWORD='somepassword'
-    export LOGGLY_DOMAIN='somesubdomain.loggly.com'
-
-Create an input:
-
-    $ loggly-create-input -i testinput -s syslogtcp
-    Creating input "testinput" of type "syslogtcp"
-    Input:testinput2
-
-Add a device to an input:
-
-    $ loggly-add-device -i testinput -d 192.168.1.1
-    Adding device "192.168.1.1" to input "testinput"
-    Device:192.168.1.1
-
-Delete a device:
-
-    $ loggly-remove-device -d 192.168.1.1
-    Removing device "192.168.1.1" from all inputs
-
-Delete an input:
-
-    $ loggly-delete-input -i testinput
-    Deleting input testinput
-    
+Coming Soon
 
 Contributing
 --------------------
-Use GitHub's standard fork/commit/pull-request cycle.  If you have any questions, email <ops@ea2d.com>.
+Use GitHub's standard fork/commit/pull-request cycle.  If you have any questions, email <joe@joekiller.com>.
 
 
 License
 --------------------
 
-    Copyright 2010 Electronic Arts Inc.
+    Copyright 2012 Joseph Lawson
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -90,3 +52,10 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+Notice
+--------------------
+Copyright 2012 Joseph Lawson
+
+This produce includes software developed at
+Electronic Arts Inc. (https://github.com/EA2D/loggly-python)

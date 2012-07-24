@@ -1,5 +1,5 @@
-# Author: Mike Babineau <mikeb@ea2d.com>
-# Copyright 2011 Electronic Arts Inc.
+# Author: Joseph Lawson <joe@joekiller.com>
+# Copyright 2012 Joseph Lawson.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
 # limitations under the License.
 
 
-class LogglyDevice(object):
+class AlertLogicHost(object):
     def __init__(self, attributes):
         for attr in attributes.keys():
             setattr(self, attr, attributes[attr])
-            
+
     def __repr__(self):
-        return "Device:%s" % self.ip
+        return "Host:%s" % self.host_id

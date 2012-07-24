@@ -1,4 +1,5 @@
-# Copyright 2011 Electronic Arts Inc.
+# Author: Joseph Lawson <joe@joekiller.com>
+# Copyright 2012 Joseph Lawson.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,12 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__ = '0.1.2'
 
-__author__ = 'Mike Babineau <mikeb@ea2d.com>'
-__copyright__ = "Copyright 2011 Electronic Arts Inc."
-__license__ = "Apache v2.0"
+class AlertLogicAppliance(object):
+    def __init__(self, attributes):
+        for attr in attributes.keys():
+            setattr(self, attr, attributes[attr])
 
-from loggly.connection import LogglyConnection
-from loggly.device import LogglyDevice
-from loggly.input import LogglyInput
+    def __repr__(self):
+        return "Appliance:%s" % self.appliance_id
