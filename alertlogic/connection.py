@@ -102,7 +102,7 @@ class AlertLogicConnection(object):
 
 
     def delete_appliance(self, appliance):
-        path = 'latest/appliance/%s/' % appliance.appliance_id
+        path = 'latest/appliance/%s' % appliance.appliance_id
         response = self._AlertLogic_delete(path)
         return response.read()
 

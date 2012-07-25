@@ -7,3 +7,5 @@ alertlogic-python.iml
 
 test/*
 alertlogic.egg-info/*
+build/*
+dist/*
