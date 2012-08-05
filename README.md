@@ -26,6 +26,10 @@ Or install from PyPI:
 
     sudo easy_install alertlogic
 
+To upgrade from a previous version:
+
+    sudo easy_install -U alertlogic
+
 
 Library Usage
 --------------------

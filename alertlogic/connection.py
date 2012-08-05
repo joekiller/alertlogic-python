@@ -13,11 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import base64
-import urllib
-import urllib2
 
+
+
+import requests
 import simplejson
+import urllib
+
+from requests.auth import HTTPBasicAuth
 
 from alertlogic.appliance import AlertLogicAppliance
 from alertlogic.host import AlertLogicHost
@@ -30,33 +33,31 @@ class AlertLogicConnection(object):
         self.access_token = access_token
         self.secret_key = secret_key
         self.base_url = 'https://%s/api' % domain
+        self.json_content_header = {'content-type': 'application/json'}
 
 
     def __repr__(self):
         return "Connection:%s" % self.base_url
 
 
-    def _add_auth(self, request):
-        base64string = base64.encodestring('%s:%s' % (self.access_token, self.secret_key)).replace('\n','')
-        request.add_header("Authorization", "Basic %s" % base64string)
-        request.add_header("Accept", "application/json")
-        return request
+    def _add_auth(self):
+        return HTTPBasicAuth(self.access_token,self.secret_key)
 
 
     def _AlertLogic_get(self, path):
         url = '%s/%s' % (self.base_url, path)
-        request = urllib2.Request(url)
-        self._add_auth(request)
-        response = urllib2.urlopen(request)
+        response = requests.get(url, auth=self._add_auth(), headers=self.json_content_header)
         return response
 
 
     def _AlertLogic_post(self, path, post_data):
         url = '%s/%s' % (self.base_url, path)
+        # Using tuples instead of dictionary for data so we must encode into a string
         data = urllib.urlencode(post_data)
-        request = urllib2.Request(url, data)
-        self._add_auth(request)
-        response = urllib2.urlopen(request)
+        response = requests.post(url,
+            auth=self._add_auth(),
+            headers=self.json_content_header,
+            data=data)
         return response
 
 
@@ -64,13 +65,14 @@ class AlertLogicConnection(object):
         url = '%s/%s' % (self.base_url, path)
         if post_data:
             data = urllib.urlencode(post_data)
-            request = urllib2.Request(url, data)
+            response = requests.delete(url,
+                auth=self._add_auth(),
+                headers=self.json_content_header,
+                data=data)
         else:
-            request = urllib2.Request(url)
-            # bit of a hack - urllib2 only supports GET and POST
-        request.get_method = lambda: 'DELETE'
-        self._add_auth(request)
-        response = urllib2.urlopen(request)
+            response = requests.delete(url,
+                auth=self._add_auth(),
+                headers=self.json_content_header)
         return response
 
 
@@ -149,9 +151,9 @@ class AlertLogicConnection(object):
 
     def add_hosts_to_appliance(self, hosts, appliance):
         path = 'latest/appliances/assign'
-        post_data = {'appliance_id': appliance.appliance_id}
+        post_data = [('appliance_id',appliance.appliance_id,)]
         for host in hosts:
-            post_data += {'host_id': host.host_id}
+            post_data.append(('host_id',host.host_id,))
         response = self._AlertLogic_post(path, post_data)
         return response.read()
 
