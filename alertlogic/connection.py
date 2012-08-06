@@ -17,7 +17,6 @@
 
 
 import requests
-import simplejson
 import urllib
 
 from requests.auth import HTTPBasicAuth
@@ -33,7 +32,7 @@ class AlertLogicConnection(object):
         self.access_token = access_token
         self.secret_key = secret_key
         self.base_url = 'https://%s/api' % domain
-        self.json_content_header = {'content-type': 'application/json'}
+        self.accept_header = {'Accept': 'application/json'}
 
 
     def __repr__(self):
@@ -46,33 +45,33 @@ class AlertLogicConnection(object):
 
     def _AlertLogic_get(self, path):
         url = '%s/%s' % (self.base_url, path)
-        response = requests.get(url, auth=self._add_auth(), headers=self.json_content_header)
+        response = requests.get(url, auth=self._add_auth(), headers=self.accept_header)
         return response
 
 
-    def _AlertLogic_post(self, path, post_data):
+    def _AlertLogic_put(self, path, put_data):
         url = '%s/%s' % (self.base_url, path)
         # Using tuples instead of dictionary for data so we must encode into a string
-        data = urllib.urlencode(post_data)
-        response = requests.post(url,
+        data = urllib.urlencode(put_data)
+        response = requests.put(url,
             auth=self._add_auth(),
-            headers=self.json_content_header,
+            headers=self.accept_header,
             data=data)
         return response
 
 
-    def _AlertLogic_delete(self, path, post_data=None):
+    def _AlertLogic_delete(self, path, put_data=None):
         url = '%s/%s' % (self.base_url, path)
-        if post_data:
-            data = urllib.urlencode(post_data)
+        if put_data:
+            data = urllib.urlencode(put_data)
             response = requests.delete(url,
                 auth=self._add_auth(),
-                headers=self.json_content_header,
+                headers=self.accept_header,
                 data=data)
         else:
             response = requests.delete(url,
                 auth=self._add_auth(),
-                headers=self.json_content_header)
+                headers=self.accept_header)
         return response
 
 
@@ -85,7 +84,7 @@ class AlertLogicConnection(object):
     def get_all_appliances(self, appliance_ids=None):
         path = 'latest/appliance'
         response = self._AlertLogic_get(path)
-        json = simplejson.loads(response.read())
+        json = response.json
         appliances = []
         if appliance_ids:
             for appliance_id in appliance_ids:
@@ -98,15 +97,14 @@ class AlertLogicConnection(object):
     def get_appliance(self, appliance_id):
         path = 'latest/appliance/%s' % appliance_id
         response = self._AlertLogic_get(path)
-        json = simplejson.loads(response.read())
-        appliance = AlertLogicAppliance(json)
+        appliance = AlertLogicAppliance(response.json)
         return appliance
 
 
     def delete_appliance(self, appliance):
         path = 'latest/appliance/%s' % appliance.appliance_id
         response = self._AlertLogic_delete(path)
-        return response.read()
+        return response
 
 
     def list_hosts(self):
@@ -118,7 +116,7 @@ class AlertLogicConnection(object):
     def get_all_hosts(self, host_ids=None):
         path = 'latest/host'
         response = self._AlertLogic_get(path)
-        json = simplejson.loads(response.read())
+        json = response.json
         hosts = []
         if host_ids:
             for host_id in host_ids:
@@ -131,41 +129,40 @@ class AlertLogicConnection(object):
     def get_host(self, host_id):
         path = 'latest/host/%s' % host_id
         response = self._AlertLogic_get(path)
-        json = simplejson.loads(response.read())
-        host = AlertLogicHost(json)
+        host = AlertLogicHost(response.json)
         return host
 
 
     def delete_host(self, host):
         path = 'latest/host/%s' % host.host_id
         response = self._AlertLogic_delete(path)
-        return response.read()
+        return response
 
 
     def add_host_to_appliance(self, host, appliance):
-        path = 'latest/appliances/assign'
-        post_data = {'appliance_id': appliance.appliance_id, 'host_id': host.host_id}
-        response = self._AlertLogic_post(path, post_data)
-        return response.read()
+        path = 'latest/appliance/assign'
+        put_data = {'appliance_id': appliance.appliance_id, 'host_id': host.host_id}
+        response = self._AlertLogic_put(path, put_data)
+        return response
 
 
     def add_hosts_to_appliance(self, hosts, appliance):
-        path = 'latest/appliances/assign'
-        post_data = [('appliance_id',appliance.appliance_id,)]
+        path = 'latest/appliance/assign'
+        put_data = [('appliance_id',appliance.appliance_id,)]
         for host in hosts:
-            post_data.append(('host_id',host.host_id,))
-        response = self._AlertLogic_post(path, post_data)
-        return response.read()
+            put_data.append(('host_id',host.host_id,))
+        response = self._AlertLogic_put(path, put_data)
+        return response
 
 
     def add_tag_to_host(self, host, tag_name, tag_value):
         path = 'latest/host/tag/%s' % host.host_id
-        post_data = {'name': tag_name, 'value': tag_value}
-        response = self._AlertLogic_post(path, post_data)
-        return response.read()
+        put_data = {'name': tag_name, 'value': tag_value}
+        response = self._AlertLogic_put(path, put_data)
+        return response
 
     def delete_tag_from_host(self, host, tag_name):
         path = 'latest/host/tag/%s' % host.host_id
-        post_data = {'name': tag_name}
-        response = self._AlertLogic_delete(path, post_data)
-        return response.read()
+        put_data = {'name': tag_name}
+        response = self._AlertLogic_delete(path, put_data)
+        return response
