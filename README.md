@@ -1,20 +1,15 @@
 alertlogic-python
 =====================
-
 Python interface for Alert Logic Threat Manager for EC2
 
 Check out [Alert Logic's AWS offerings](https://aws.amazon.com/solution-providers/isv/alert-logic)
 
-
-
 This software is heavily based on EA2D's [Loggly-Python](https://github.com/EA2D/loggly-python) platform written by Mike Babineau.
-
 
 Requirements
 --------------------
 - Alert Logic Cloud account
-- simplejson Python module
-
+- Requests Python module
 
 Installation
 --------------------
@@ -22,18 +17,17 @@ Install using the provided `setup.py`:
 
     sudo setup.py install
 
-Or install from PyPI:
+Or install using pip:
 
-    sudo easy_install alertlogic
+    sudo pip install alertlogic
 
-To upgrade from a previous version:
+To upgrade using Pip:
 
-    sudo easy_install -U alertlogic
-
+    sudo pip install --upgrade alertlogic
 
 Library Usage
 --------------------
-Coming Soon
+Check out the test library for sample functionality.
 
 Contributing
 --------------------

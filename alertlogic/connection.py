@@ -59,6 +59,13 @@ class AlertLogicConnection(object):
             data=data)
         return response
 
+    def _AlertLogic_put_params(self, path, params):
+        url = '%s/%s' % (self.base_url, path)
+        headers = self.accept_header
+        headers['Content-Length'] = '0'
+        response = requests.put(url, auth=self._add_auth(), headers=headers, params=params)
+        return response
+
 
     def _AlertLogic_delete(self, path, put_data=None):
         url = '%s/%s' % (self.base_url, path)
@@ -165,4 +172,10 @@ class AlertLogicConnection(object):
         path = 'latest/host/tag/%s' % host.host_id
         put_data = {'name': tag_name}
         response = self._AlertLogic_delete(path, put_data)
+        return response
+
+    def claim_appliance(self, instance_id, zone):
+        path = 'latest/appliance/claim'
+        payload = {'instance_id':instance_id,'zone':zone}
+        response = self._AlertLogic_put_params(path,payload)
         return response
