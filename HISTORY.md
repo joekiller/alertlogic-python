@@ -1,3 +1,7 @@
+## 0.4.0 (2013-01-30
+
+* Updated to work with Requests 1.1.0
+
 ## 0.3.0 (2012-08-29)
 
 * Added claim_appliance functionality to implement new API call.

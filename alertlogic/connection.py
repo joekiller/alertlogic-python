@@ -91,7 +91,7 @@ class AlertLogicConnection(object):
     def get_all_appliances(self, appliance_ids=None):
         path = 'latest/appliance'
         response = self._AlertLogic_get(path)
-        json = response.json
+        json = response.json()
         appliances = []
         if appliance_ids:
             for appliance_id in appliance_ids:
@@ -104,7 +104,7 @@ class AlertLogicConnection(object):
     def get_appliance(self, appliance_id):
         path = 'latest/appliance/%s' % appliance_id
         response = self._AlertLogic_get(path)
-        appliance = AlertLogicAppliance(response.json)
+        appliance = AlertLogicAppliance(response.json())
         return appliance
 
 
@@ -123,7 +123,7 @@ class AlertLogicConnection(object):
     def get_all_hosts(self, host_ids=None):
         path = 'latest/host'
         response = self._AlertLogic_get(path)
-        json = response.json
+        json = response.json()
         hosts = []
         if host_ids:
             for host_id in host_ids:
@@ -136,7 +136,7 @@ class AlertLogicConnection(object):
     def get_host(self, host_id):
         path = 'latest/host/%s' % host_id
         response = self._AlertLogic_get(path)
-        host = AlertLogicHost(response.json)
+        host = AlertLogicHost(response.json())
         return host
 
 
