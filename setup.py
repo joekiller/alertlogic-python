@@ -22,7 +22,7 @@ except ImportError:
 
 
 setup(name = 'alertlogic',
-    version = '0.4.1',
+    version = '0.4.2',
     description = 'Alert Logic Library',
     long_description='Python interface to Alert Logic.',
     author = 'Joseph Lawson',
