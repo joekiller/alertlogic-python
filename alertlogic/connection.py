@@ -53,9 +53,11 @@ class AlertLogicConnection(object):
         url = '%s/%s' % (self.base_url, path)
         # Using tuples instead of dictionary for data so we must encode into a string
         data = urllib.urlencode(put_data)
+        headers = self.accept_header
+        headers['Content-Type'] = 'application/x-www-form-urlencoded'
         response = requests.put(url,
             auth=self._add_auth(),
-            headers=self.accept_header,
+            headers=headers,
             data=data)
         return response
 
