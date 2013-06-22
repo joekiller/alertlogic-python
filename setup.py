@@ -1,6 +1,6 @@
 #!/usr/scripts/env python
 
-# Copyright 2012 Joseph Lawson.
+# Copyright 2013 Joseph Lawson.
 # 
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ except ImportError:
 
 
 setup(name = 'alertlogic',
-    version = '0.4.2',
+    version = '2.0',
     description = 'Alert Logic Library',
     long_description='Python interface to Alert Logic.',
     author = 'Joseph Lawson',

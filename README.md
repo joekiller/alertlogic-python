@@ -38,6 +38,7 @@ License
 --------------------
 
     Copyright 2012 Joseph Lawson
+    Copyright 2013 Joseph Lawson
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -54,6 +55,7 @@ License
 Notice
 --------------------
 Copyright 2012 Joseph Lawson
+Copyright 2013 Joseph Lawson
 
 This product includes software developed at
 Electronic Arts Inc. (https://github.com/EA2D/loggly-python)

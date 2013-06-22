@@ -1,3 +1,4 @@
+# Author: Joseph Lawson <joe@joekiller.com>
 # Copyright 2013 Joseph Lawson.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__ = '2.0'
-__author__ = 'Joseph Lawson <joe@joekiller.com>'
-__copyright__ = "Joseph Lawson"
-__license__ = "Apache v2.0"
 
-from alertlogic.connection import AlertLogicConnection
-from alertlogic.host import AlertLogicHost
-from alertlogic.appliance import AlertLogicAppliance
-from alertlogic.policy import AlertLogicPolicy
+class AlertLogicPolicy(object):
+    POLICY_TYPES = ['appliance_assignment', 'tmhost']
+
+    def __init__(self, attributes):
+        for attr in attributes.keys():
+            setattr(self, attr, attributes[attr])
+
+    def __repr__(self):
+        return "Policy:%s" % self.id

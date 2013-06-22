@@ -1,3 +1,7 @@
+## 2.0 (2013-06-21)
+
+* First shot at python interface for new Threat Manger API
+
 ## 0.4.2 (2013-02-01)
 
 * Fixed a bug in putting form data where AL is expecting a Content-Type header with the value application/x-www-form-urlencoded
